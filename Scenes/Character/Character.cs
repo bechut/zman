@@ -5,20 +5,33 @@ namespace Yman
 {
 	public partial class Character : CharacterBody2D
 	{
+		private AnimatedSprite2D Button;
 		public float Speed { get; set; } = 200f;
 		public Globals.Direction LastDir { get; set; } = Globals.Direction.Down;
 		public bool IsRun { get; set; } = false;
-		
 
+		public void OpenButton()
+		{
+			Button.Show();
+			Button.Play();
+		}
+		
+		public void CloseButton()
+		{
+			Button.Hide();
+			Button.Pause();
+		}
 
 		public override void _Ready()
 		{
 			GD.Print("Character ready");
+			Button = GetNode<AnimatedSprite2D>("Button");
+			GD.Print(Button);
+			CloseButton();
 		}
 
 		public override void _PhysicsProcess(double delta)
 		{
-			GD.Print(Velocity.Angle());
 			var velocity = new Vector2(0, 0);
 
 			if (Input.IsActionPressed("Right"))

@@ -15,6 +15,10 @@ namespace Yman
 			character = (Character)characterScene.Instantiate();
 			AddChild(character);
 			character.GlobalPosition = new Vector2(100, 100);
+
+			var mat = (ShaderMaterial)GetNode<TileMapLayer>("Wall").Material;
+			GD.Print(mat);
+			mat.SetShaderParameter("player_pos", character.GlobalPosition);
 		}
 	}
 }
